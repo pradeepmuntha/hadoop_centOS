@@ -1,4 +1,4 @@
 FROM pradeepmuntha/hadoop_centos_autobuild:v1 
-RUN yum -y install httpd; yum clean all; service httpd start 
+RUN yum -y install httpd; yum clean all
 EXPOSE 80
-RUN "/etc/init.d/httpd start"
+RUN /etc/init.d/httpd start
