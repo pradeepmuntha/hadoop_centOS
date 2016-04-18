@@ -1,6 +1,36 @@
- <configuration>
-      <property>
-          <name>fs.defaultFS</name>
-          <value>hdfs://master1</value>
-      </property>
-  </configuration>
+<?xml version='1.0'?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+    <property>
+        <name>topology.script.file.name</name>
+        <value>/home/pradeepkumar/hbase-in-a-box/hbase.7/bigdata-hadoop/hadoop/hadoop/etc/hadoop/hadoop-rack.py</value>
+    </property>
+    <!-- Depends on the specified value in hdfs-site.xml's dfs.nameservices -->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://master1</value>
+    </property>
+
+    <!-- End of auto-generated properties -->
+    <property>
+        <name>dfs.journalnode.edits.dir</name>
+        <value>/data/journal</value>
+        <description>Absolute path to the where edits are stored to the journal node, one path per journal node</description>
+    </property>
+
+    <!-- To be overriden in gridforce-cluster profile. Default to 4KB here -->
+    <property>
+        <name>io.file.buffer.size</name>
+        <value>65536</value>
+    </property>
+    <property>
+        <name>dfs.cluster.administrators</name>
+        <value>hdfs</value>
+        <description>
+          The users who can view the default servlets in HDFS.
+        </description>
+    </property>
+</configuration>
