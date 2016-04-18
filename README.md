@@ -22,17 +22,51 @@ Before startup.sh script is executed, directory structure is needed to persist b
 
 * *Note*: Commands from here can be executed as normal user that is part of docker group. Ther are many documents and blogs in internet that discusses how to add a normal user to docker group so all docker commands can be executed as non-root users (This should take less than a minute or two).For this example i have a user account "docker" on my local box that is part of "docker" group.
 
+* *Start Docker Containers and Services*:
+
 ```bash
 $ git clone https://github.com/pradeepmuntha/hadoop_centOS
-$ hadoop_centOS/startup.sh "/home/docker/data" (This should be same directory as VOLUMEDIR)
+$ hadoop_centOS/startup.sh "/home/docker/data" start  (Directory used should be same as $VOLUMEDIR)
 ```
 
-When executed first time, image download will take about 5 to 10 mintues depending on internet bandwidth as container image has Hadoop and JDK s/w pre-installed. Further executions of startup.sh do not download entire image again from docker registry as its present locally. At completion of startup.sh you should have three containers running one serving as Namenode and other two as datanodes. Hadoop software is installed in path */usr/local/hadoop*.
+* *Start services only*:
+Assuming containers are already running
 
 ```bash
-$ docker ps   (To Display list of contianers running)
-$ docker attach master (Shell access to hdfs user account on namenode. To exit container DO NOT TYPE EXIT OR Ctrl + D as it will shut the container down. Instead use Ctrl + p + q combination to returb back to host shell).
-$ docker images (To list images present on local box)
+$ hadoop_centOS/startup.sh "/home/docker/data" start_services
+```
+
+* *Stop Services only*:
+This will only stop services. Containers will continue to be up and available for services startup again.
+
+```bash
+$ hadoop_centOS/startup.sh "/home/docker/data" stop_services
+```
+
+* *Stop both services and Containers*:
+
+```bash
+$ hadoop_centOS/startup.sh "/home/docker/data" stop
+```
+
+* *Destroy containers and delete all directories and logs*:
+
+```bash
+$ hadoop_centOS/startup.sh "/home/docker/data" destroy
+```
+
+Handy for quick cleanup of everything before starting over from directories creation as root user and "Start Docker Containers and Services" section.  
+
+
+* *Note*: When executed first time, image download will take about 5 to 10 mintues depending on internet bandwidth as container image has Hadoop and JDK s/w pre-installed. Further executions of startup.sh do not download entire image again from docker registry as its present locally. At completion of startup.sh you should have three containers running one serving as Namenode and other two as datanodes. Hadoop software is installed in path */usr/local/hadoop*.
+
+* *Moving in and out of Docker containers and some useful commands*:
+
+```bash
+$ docker ps   (To Display list of contianers running on host)
+$ docker attach master (Shell access to hdfs user account on namenode. To exit container DO NOT TYPE EXIT OR Ctrl + D as it will shut the container down. Instead use Ctrl + p + q combination to return back to linux host shell).
+$ docker images (To list images present on host running docker engine)
+$ docker exec -u hdfs master "ps aux"
 ```
 
 Namenode Health page can be accessed from browser of Linux host running docker engine on port 50070. If hostname of Linux host running docker software is docker-host then NN health page would be accessible from http://docker-host:50070 from browser.  
