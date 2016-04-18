@@ -12,7 +12,7 @@ fi
 
 case $ACT in
 
-start)
+fresh_start)
 	if [ -z $VOL ] || [ ! -d $VOL ]
 	then
 		echo "Volume Directory not mentioned as fist argument or directory does not exist. Please ensure pre-requisite commands mentioned in Readme section of GIT are executed as root user"
@@ -37,10 +37,24 @@ start)
 	docker exec -u hdfs slave2 $HADOOP_PREFIX/sbin/hadoop-daemon.sh start datanode
 	;;
 
-stop)
+start_services)
+	docker exec -u hdfs master $HADOOP_PREFIX/sbin/hadoop-daemon.sh start namenode
+	docker exec -u hdfs slave1 $HADOOP_PREFIX/sbin/hadoop-daemon.sh start datanode
+        docker exec -u hdfs slave2 $HADOOP_PREFIX/sbin/hadoop-daemon.sh start datanode
+	;;
+
+stop_services)
 	docker exec -u hdfs slave2 $HADOOP_PREFIX/sbin/hadoop-daemon.sh stop datanode
 	docker exec -u hdfs slave1 $HADOOP_PREFIX/sbin/hadoop-daemon.sh stop datanode
 	docker exec -u hdfs master $HADOOP_PREFIX/sbin/hadoop-daemon.sh stop namenode
+	;;
+
+stop)
+	docker exec -u hdfs slave2 $HADOOP_PREFIX/sbin/hadoop-daemon.sh stop datanode
+        docker exec -u hdfs slave1 $HADOOP_PREFIX/sbin/hadoop-daemon.sh stop datanode
+        docker exec -u hdfs master $HADOOP_PREFIX/sbin/hadoop-daemon.sh stop namenode
+	docker stop master slave1 slave2 
+	docker rm master slave1 slave2
 	;;
 
 destroy)
