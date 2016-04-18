@@ -27,5 +27,14 @@ $ git clone https://github.com/pradeepmuntha/hadoop_centOS
 $ hadoop_centOS/startup.sh "/home/docker/data" (This should be same directory as VOLUMEDIR)
 ```
 
-This should pull all images needed, install hadoop and JDK, spin up containers and start services needed to bring up Hadoop Layer.
+When executed first time, image download will take about 5 to 10 mintues depending on internet bandwidth as container image has Hadoop and JDK s/w pre-installed. Further executions of startup.sh do not download entire image again from docker registry as its present locally. At completion of startup.sh you should have three containers running one serving as Namenode and other two as datanodes. Hadoop software is installed in path */usr/local/hadoop*.
+
+```bash
+$ docker ps   (To Display list of contianers running)
+$ docker attach master (Shell access to hdfs user account on namenode. To exit container DO NOT TYPE EXIT OR Ctrl + D as it will shut the container down. Instead use Ctrl + p + q combination to returb back to host shell).
+$ docker images (To list images present on local box)
+```
+
+Namenode Health page can be accessed from browser of Linux host running docker engine on port 50070. If hostname of Linux host running docker software is docker-host then NN health page would be accessible from http://docker-host:50070 from browser.  
+
 WIP to update configurations and S/W locations needed to bring up Yarn and HBase layer. Expecting to complete pretty soon :).
