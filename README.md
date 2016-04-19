@@ -12,13 +12,17 @@ I am yet to add functionalities needed to spin up cluster in HA mode along with 
 
 ##Pre-Requisite:
 
-Before startup.sh script is executed, directory structure is needed to persist both namenode fsimage and datanode blocks and logs onto a more permanent storage which do not get destroyed along with containers as they are ephemeral. These pre-requisite commands should be executed as "root" user. (This is needed to avoid user permissions differences between docker host exporting dicrectories as volumes and containers. There are other ways which can be used to ensure ownership on exported volumes remain same on host and containers but below is easy way).
+Before startup.sh script is executed, docker software should already be installed with services running on host (Please refer articles on internet as s/w installation is fairly simple) and directory structure needed to persist namenode fsimage with datanode blocks and logs onto a more permanent storage which do not get destroyed along with containers as they are ephemeral. Below pre-requisite commands should be executed as "root" user. (This is needed to avoid user permissions differences between docker host exporting dicrectories as volumes and containers. There are other ways which can be used to ensure ownership on exported volumes remain same on host and containers but below is easy way).
 
 ```bash
 # export VOLUMEDIR="/home/docker/data"   (This directory can be any path with ample storage space to hold datanode blocks).
 # mkdir -p $VOLUMEDIR/master/data $VOLUMEDIR/slave1/data-{1,2} $VOLUMEDIR/slave2/data-{1,2} $VOLUMEDIR/logs/
 # chmod 1777 $VOLUMEDIR/master/data $VOLUMEDIR/slave1/data-{1,2} $VOLUMEDIR/slave2/data-{1,2} $VOLUMEDIR/logs
 ```
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
 
 * *Note*: Commands from here can be executed as normal user that is part of docker group. Ther are many documents and blogs in internet that discusses how to add a normal user to docker group so all docker commands can be executed as non-root users (This should take less than a minute or two).For this example i have a user account "docker" on my local box that is part of "docker" group.
 
