@@ -74,6 +74,6 @@ destroy)
 	fi
 	;;
 *)	
-	echo "Wrong command usage. Supported commands are start, stop and destroy"
+	echo "Wrong command usage. Supported commands are start, stop, start_services, stop_services and destroy"
 	;;
 esac
