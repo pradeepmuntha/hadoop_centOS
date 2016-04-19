@@ -1,11 +1,81 @@
+<?xml version='1.0'?>
 <configuration>
     <property>
-        <name>yarn.nodemanager.aux-services</name>
-        <value>mapreduce_shuffle</value>
+	<name>yarn.nodemanager.vmem-pmem-ratio</name>
+	<value>2</value>
+   </property>
+
+    <property>
+	<name>yarn.resourcemanager.hostname</name>
+	<value>master1</value>
+   </property>
+
+   <property>
+	<name>yarn.log-aggregation.retain-seconds</name>
+	<value>86400</value>
+   </property>
+
+   <property>
+	<name>yarn.nodemanager.local-dirs</name>
+	<value>/data-1/yarn,/data-2/yarn</value>
+   </property>
+
+    <property>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>1024</value>
+        <description>the amount of memory on the NodeManager in GB</description>
     </property>
 
     <property>
-      <name>yarn.application.classpath</name>
-      <value>/usr/local/hadoop/etc/hadoop, /usr/local/hadoop/share/hadoop/common/*, /usr/local/hadoop/share/hadoop/common/lib/*, /usr/local/hadoop/share/hadoop/hdfs/*, /usr/local/hadoop/share/hadoop/hdfs/lib/*, /usr/local/hadoop/share/hadoop/mapreduce/*, /usr/local/hadoop/share/hadoop/mapreduce/lib/*, /usr/local/hadoop/share/hadoop/yarn/*, /usr/local/hadoop/share/hadoop/yarn/lib/*</value>
+        <name>yarn.resourcemanager.ha.enabled</name>
+        <value>false</value>
+        <description>Enabling Resource Manager High Availibilty. </description>
     </property>
+
+    <property>
+        <name>yarn.resourcemanager.connect.retry-interval.ms</name>
+        <value>2000</value>
+    </property>
+
+    <property>
+        <name>yarn.app.mapreduce.am.scheduler.connection.wait.interval-ms</name>
+        <value>5000</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</value>
+        <description>In case you do not want to use the default scheduler</description>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+        <description>shuffle service that needs to be set for Map Reduce to run </description>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.delete.debug-delay-sec</name>
+        <value>43200</value>
+        <description>Debug delay to retain logs and local files with aggregation turned on</description>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.log.retain-seconds</name>
+        <value>10800</value>
+        <description>This is the amount of time the logs are kept around in the server,we override this in production</description>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.minimum-allocation-mb</name>
+        <value>256</value>
+        <description>The minimum allocation for every container request at the RM, in MBs. Memory requests lower than this won't take effect, and the specified value will get allocated at minimum.</description>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.max-completed-applications</name>
+        <value>1000</value>
+        <description>The maximum number of completed applications RM keeps</description>
+    </property>
+
 </configuration>
