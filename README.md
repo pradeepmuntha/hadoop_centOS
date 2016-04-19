@@ -33,15 +33,13 @@ $ git clone https://github.com/pradeepmuntha/hadoop_centOS
 $ hadoop_centOS/startup.sh "/home/docker/data" start  (Directory used should be same as $VOLUMEDIR)
 ```
 
-* *Start services only*:na
-Assuming containers are already running
+* *Start services only*: Assuming containers are already running
 
 ```bash
 $ hadoop_centOS/startup.sh "/home/docker/data" start_services
 ```
 
-* *Stop Services only*:
-This will only stop services. Containers will continue to be up and available for services startup again.
+* *Stop Services only*: This will only stop services. Containers will continue to be up and available for services startup again.
 
 ```bash
 $ hadoop_centOS/startup.sh "/home/docker/data" stop_services
