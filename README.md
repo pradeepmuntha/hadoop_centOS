@@ -2,7 +2,7 @@
 I did run into multiple situations in the past where i wanted to run tests on hadoop cluster running on multiple nodes using different JDK and Hadoop versions. I had to go through painful process of spinning up VM's with some Linux OS, Download different versions of s/w needed, setup environment and basic config files before i could actually test what i wanted to in Hadoop layer. If you are one such guy,
 looking for a quick hadoop 3 node cluster setup to run few tests, then you are in right place.
 
-All you have to do is run couple of commands mentioned below which will pull docker image from pradeepmuntha/hadoop_centos_autobuild repository which is a UFS layered image running CentOS 6.7 with CDH-5.7.0 and Hadoop version 2.6.0 with JDK 1.8.0_66. "startup.sh" script included in this GIT will help you spin up a basic non HA cluster with one NN and two datanodes. But one can always use docker image from hadoop_centos_autobuild repo and spin up any number of datanodes needed.
+All you have to do is run couple of commands mentioned below which will pull docker image from pradeepmuntha/hadoop_centos_autobuild repository which is a UFS layered image running CentOS 6.7 with CDH-5.7.0 and Hadoop version 2.6.0 with JDK 1.8.0_66. "startup.sh" script included in this GIT will help you spin up a basic non HA cluster with 1 NN and 2 Datanodes along with 1 RM and 2 Node Managers. But one can always use docker image from hadoop_centos_autobuild repo and spin up any number of datanodes/NodeManagers needed.
 
 I am yet to add functionalities needed to spin up cluster in HA mode along with support for other Bigdata ecosystem projects.This will also be re-factored in a better way in coming days.
 
@@ -29,7 +29,7 @@ $ git clone https://github.com/pradeepmuntha/hadoop_centOS
 $ hadoop_centOS/startup.sh "/home/docker/data" start  (Directory used should be same as $VOLUMEDIR)
 ```
 
-* *Start services only*:
+* *Start services only*:na
 Assuming containers are already running
 
 ```bash
@@ -69,6 +69,6 @@ $ docker images (To list images present on host running docker engine)
 $ docker exec -u hdfs master "ps aux"
 ```
 
-Namenode Health page can be accessed from browser of Linux host running docker engine on port 50070. If hostname of Linux host running docker software is docker-host then NN health page would be accessible from http://docker-host:50070 from browser.  
+Namenode Health page can be accessed from browser of Linux host running docker engine on port 50070 and RM page on port 8088. If hostname of Linux host running docker software is docker-host then NN health page would be accessible from http://docker-host:50070 from browser and RM page from http://docker-host:8088
 
-WIP to update configurations and S/W locations needed to bring up Yarn and HBase layer. Expecting to complete pretty soon :).
+WIP to update configurations and S/W locations needed to bring up HBase layer. Expecting to complete pretty soon :).
