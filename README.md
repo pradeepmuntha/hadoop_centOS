@@ -33,6 +33,24 @@ $ git clone https://github.com/pradeepmuntha/hadoop_centOS
 $ hadoop_centOS/startup.sh "/home/docker/data" start  (Directory used should be same as $VOLUMEDIR)
 ```
 
+This command should do all the action in background and start three containers (1 Master and 2 slave) with necessary services. Running containers can be verified using command
+
+```bash
+$ docker ps
+$ docker exec -t -u hdfs master /usr/local/hadoop/bin/hdfs dfs -put /etc/redhat-release /
+$ docker exec -t -u hdfs master /usr/local/hadoop/bin/hdfs dfs -ls /
+```
+We can also attach outselves with the container bash shell and work on container as on Normal Linux host using
+
+```bash
+$docker attach master
+```
+You will be dropped to "master" container hdfs user shell.
+
+Note: TO EXIT FROM CONTAINER, DO NOT TYPE "exit" OR "Ctrl+d" AS IT WILL SHUTDOWN CONTAINER. Use key sequence Ctrl+p Ctrl+q
+Hadoop and JDK are deployed under /usr/local in containers.
+
+
 * *Start services only*: Assuming containers are already running
 
 ```bash
