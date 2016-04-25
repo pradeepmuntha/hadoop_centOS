@@ -14,16 +14,8 @@ fi
 case $ACT in
 
 start)
-	if [ -z $VOL ] || [ ! -d $VOL ]
-	then
-		echo "Volume Directory not mentioned as fist argument or directory does not exist. Please ensure pre-requisite commands mentioned in Readme section of GIT are executed as root user"
-		exit 1
-	fi
-
 	docker pull pradeepmuntha/hadoop_centos_autobuild:latest
-
 	CNT=`docker network ls | grep "custom_bridge" | grep -v grep |wc -l`
-
 	if [ "$CNT" -ne 0 ]
 	then
         	echo "Docket network \"custom_bridge\" network already exists on the system so not re-creating it !!!!. Execute 'docker network ls' command to check list of docker networks on host" 
